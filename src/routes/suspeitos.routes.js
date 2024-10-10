@@ -105,6 +105,24 @@ suspeitosRoutes.post("/", (req, res) => {
 })
 
 // Rota para buscar um suspeito específico por ID
+suspeitosRoutes.get("/:id", (req, res) => {
+    const { id } = req.params
+
+    //console.log(id)
+
+    const suspeito = suspeitos.find((suspect) =>
+        suspect.id === Number(id)
+    )
+
+    //console.log(filme)
+
+    if (!suspeito) {
+        return res.status(404).send({ message: "Suspeito não encontrado!" })
+    }
+
+    return res.status(200).send(suspeito)
+})
+
 // Rota para editar algum atributo de um suspeito
 // Rota para deletar um suspeito
 
