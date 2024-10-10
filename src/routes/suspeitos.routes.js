@@ -54,6 +54,10 @@ let suspeitos = [
 ]
 
 // Rota para buscar todos os suspeitos
+suspeitosRoutes.get("/", (req, res) => {
+    return res.status(200).send(suspeitos)
+})
+
 // Rota para cadastrar um novo suspeito
 // Rota para buscar um suspeito específico por ID
 // Rota para editar algum atributo de um suspeito
