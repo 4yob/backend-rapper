@@ -114,7 +114,7 @@ suspeitosRoutes.get("/:id", (req, res) => {
         suspect.id === Number(id)
     )
 
-    //console.log(filme)
+    //console.log(suspeito)
 
     if (!suspeito) {
         return res.status(404).send({ message: "Suspeito não encontrado!" })
