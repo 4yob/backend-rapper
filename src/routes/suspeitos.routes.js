@@ -7,7 +7,7 @@ let suspeitos = [
         id: Number(Math.floor(Math.random() * 99) + 1),
         nome: "Beyoncé",
         idade: 43,
-        ativSuspeita: true,
+        ativSuspeita: "sim",
         descricao: [
             "Negra",
             "Cabelo loiro longo",
@@ -19,7 +19,7 @@ let suspeitos = [
         id: Number(Math.floor(Math.random() * 99) + 1),
         nome: "Jay-Z",
         idade: 54,
-        ativSuspeita: true,
+        ativSuspeita: "sim",
         descricao: [
             "Negro",
             "Cabelo preto trançado",
@@ -31,7 +31,7 @@ let suspeitos = [
         id: Number(Math.floor(Math.random() * 99) + 1),
         nome: "Sean Combs",
         idade: 54,
-        ativSuspeita: true,
+        ativSuspeita: "sim",
         descricao: [
             "Negro",
             "Cabelo preto curto",
@@ -43,7 +43,7 @@ let suspeitos = [
         id: Number(Math.floor(Math.random() * 99) + 1),
         nome: "Rihanna",
         idade: 36,
-        ativSuspeita: false,
+        ativSuspeita: "não",
         descricao: [
             "Negra",
             "Cabelo preto longo",
@@ -59,6 +59,51 @@ suspeitosRoutes.get("/", (req, res) => {
 })
 
 // Rota para cadastrar um novo suspeito
+suspeitosRoutes.post("/", (req, res) => {
+    const {
+        nome,
+        idade,
+        ativSuspeita,
+        descricao
+    } = req.body
+
+    
+    //Validação do nome obrigatório
+    if (!nome) {
+        return res.status(400).send({
+            message: "O campo nome é obrigatório!"
+        })
+    }
+
+    //Validação da idade dos suspeitos como números inteiros
+    if (!Number.isInteger(idade)) {
+        return res.status(400).send({
+            message: "O campo idade precisa ser preenchido por um número inteiro!"
+        })
+    }
+
+    //Validação de envolvimento em atividade suspeita
+    if (ativSuspeita != "sim" && ativSuspeita != "não") {
+        return res.status(400).send({
+            message: "O campo ativSuspeita deve ser preenchido com 'sim' ou 'não'!"
+        })
+    }
+
+    const novoSuspeito = {
+        id: Number(Math.floor(Math.random() * 99) + 1),
+        nome,
+        idade,
+        ativSuspeita,
+        descricao
+    }
+
+    suspeitos.push(novoSuspeito)
+    return res.status(201).send({
+        message: "Suspeito cadastrado!",
+        novoSuspeito,
+    })
+})
+
 // Rota para buscar um suspeito específico por ID
 // Rota para editar algum atributo de um suspeito
 // Rota para deletar um suspeito
