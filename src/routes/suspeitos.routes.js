@@ -123,7 +123,31 @@ suspeitosRoutes.get("/:id", (req, res) => {
     return res.status(200).send(suspeito)
 })
 
-// Rota para editar algum atributo de um suspeito
+// Rota para atualizar um suspeito
+suspeitosRoutes.put("/:id", (req, res) => {
+    const { id } = req.params
+
+    const suspeito = suspeitos.find((suspect) => suspect.id === Number(id)
+    )
+
+    if (!suspeito) {
+        return res.status(404).send({ message: "Suspeito não encontrado!" })
+    }
+
+    const { nome, idade, ativSuspeita, descricao } = req.body
+    //console.log(titulo)
+
+    suspeito.nome = nome
+    suspeito.idade = idade
+    suspeito.ativSuspeita = ativSuspeita
+    suspeito.descricao = descricao
+
+    return res.status(200).send({
+        message: "Suspeito atualizado!",
+        suspeito,
+    })
+})
+
 // Rota para deletar um suspeito
 
 export default suspeitosRoutes
