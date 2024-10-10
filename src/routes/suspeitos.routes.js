@@ -149,5 +149,21 @@ suspeitosRoutes.put("/:id", (req, res) => {
 })
 
 // Rota para deletar um suspeito
+suspeitosRoutes.delete("/:id", (req, res) => {
+    const { id } = req.params
+    
+    const suspeito = suspeitos.find((suspect) => suspect.id === Number(id))
+    
+    if (!suspeito) {
+        return res.status(404).send({ message: "Suspeito não encontrado!" })
+    };
+
+    suspeitos = suspeitos.filter((suspect) => suspect.id !== Number(id))
+
+    return res.status(200).send({
+        message: "Suspeito deletado!",
+        suspeito,
+    })
+});
 
 export default suspeitosRoutes
