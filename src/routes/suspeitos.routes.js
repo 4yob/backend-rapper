@@ -51,6 +51,18 @@ let suspeitos = [
             "1,73 m"
         ]
     },
+    {
+        id: Number(Math.floor(Math.random() * 99) + 1),
+        nome: "R. Kelly",
+        idade: 57,
+        ativSuspeita: "sim",
+        descricao: [
+            "Negro",
+            "Cabelo preto curto",
+            "Olhos Castanhos",
+            "1,85 m"
+        ]
+    }
 ]
 
 // Rota para buscar todos os suspeitos
